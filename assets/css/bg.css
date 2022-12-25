@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+#about-us-1 .image-container{background:url(../images/about/about_1.png);}
+#about-us-2 .image-container{background:url(../images/about/about_2.png);}
+
+.team-wrapper{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

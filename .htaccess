@@ -1,0 +1,16 @@
+RewriteEngine On    # Turn on the rewriting engine
+# RewriteCond %{HTTPS} off
+# RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Home redirections
+RewriteRule    ^/?$    index.php    [NC,L]
+RewriteRule    ^home/?$    index.php    [NC,L]
+RewriteRule    ^contact/?$    contact.php    [NC,L]
+RewriteRule    ^about/?$    about.php    [NC,L]
+RewriteRule    ^blog/?$    blog.php    [NC,L]
+RewriteRule    ^blog_details/?$    single_blog.php    [NC,L]
+RewriteRule    ^click_photography/?$    click_photogrphy.php    [NC,L]
+RewriteRule    ^gallery/?$    gallery.php    [NC,L]
+# RewriteRule    ^blog_detail/?$    blog_details.php    [NC,L]
