@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/reservations', [ReservationController::class, 'index'])->name('all.reservations');
 Route::get('/create', [ReservationController::class, 'create'])->name('reservation.create');
 Route::post('/store/reservation', [ReservationController::class, 'store'])->name('reservation.store');

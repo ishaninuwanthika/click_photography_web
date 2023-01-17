@@ -20,7 +20,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total Reservations</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">40</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_reservations }}</div>
                         </div>
                         {{-- <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -38,7 +38,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Upcomings Reservations</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">06</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $confirmed_reservations }}</div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Reservations
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">07</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $pending_reservations }}</div>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                 Cancel Reservations</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $cancelled_reservations }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
