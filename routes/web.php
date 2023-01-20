@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\CalendarController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,4 +28,5 @@ Route::post('/action/reservation/{id}', [ReservationController::class, 'reservat
 Route::get('/edit/reservation/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
 Route::post('/update/reservation/{id}', [ReservationController::class, 'update'])->name('update.reservation');
 
+Route::get('calendar/view', [CalendarController::class, 'view'])->name('calendar.view');
 require __DIR__.'/auth.php';

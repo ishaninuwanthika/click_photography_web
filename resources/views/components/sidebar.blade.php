@@ -24,7 +24,7 @@
     <div id="reservation" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('all.reservations') }}">All Reservations</a>
-            <a class="collapse-item" href="cards.html">Calender</a>
+            <a class="collapse-item" href="{{ route('calendar.view') }}">Calender</a>
         </div>
     </div>
 

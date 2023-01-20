@@ -39,20 +39,33 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $event_description     = $request->res_message;
-        $client_email          = $request->res_email;
-        $client_name           = $request->res_name;
-        $event_date            = $request->res_date;
-        $client_contact_number = $request->res_contact_number;
-
-        $event = new Event;
-        $event->name          = 'A new Reservation';
-        $event->description   = $event_description. "<br/>" . "Client name :" .$client_name . "<br/>" . "Client Email :" . $client_email . "<br/>" . "Client Contact Number :" . $client_contact_number;
-        $event->startDateTime = Carbon::now();
-        $event->endDateTime   = Carbon::now()->addHour();
-
-        $event->save();
+        $datenow = date("Y-m-d H:i:s");
+        $code = 'CP';
+        $ymd = date('ymd');
+        $squence = 0;    
         
+        $booking_count = Reservation::count();
+
+        if($booking_count == 0){
+            $squence =+ 1;
+    
+        }else{
+            $squence = $booking_count + 1;
+        }
+
+        $squence = str_pad($squence,4,0,STR_PAD_LEFT);
+        $order_number = $code.$ymd.'_'.$squence;
+
+        $reservation = Reservation::create([
+            'res_name'           => $request->res_name,
+            'res_email'          => $request->res_email,
+            'res_contact_number' => $request->res_contact_number,
+            'res_message'        => $request->res_message,
+            'res_date'           => $request->res_date,
+            'number'             => $order_number,
+            'is_delete'          => false
+        ]);
+
         session()->flash('success', 'Event Created!');
 
         return redirect()->back();
@@ -123,6 +136,18 @@ class ReservationController extends Controller
                 $reservation->update([
                     'status' => "Confirmed"
                 ]);
+                
+                $event_description = $reservation->res_message;
+                $client_name       = $reservation->res_name;
+                $client_email      = $reservation->res_email;
+                $client_contact_number = $reservation->res_contact_number;
+
+                $event = new Event;
+                $event->name          = $event_description;
+                $event->description   = $event_description. "<br/>" . "Client name :" .$client_name . "<br/>" . "Client Email :" . $client_email . "<br/>" . "Client Contact Number :" . $client_contact_number;
+                $event->startDateTime = Carbon::now();
+                $event->endDateTime   = Carbon::now()->addHour();
+                $event->save();
 
                 session()->flash('success', 'Booking Confirmed');
             }
