@@ -16,17 +16,21 @@ use App\Http\Controllers\CalendarController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::middleware('auth')->group(function(){
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('all.reservations');
+    Route::get('/create', [ReservationController::class, 'create'])->name('reservation.create');
+    Route::post('/store/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+    Route::post('/action/reservation/{id}', [ReservationController::class, 'reservationAction'])->name('reservation.action');
+    Route::get('/edit/reservation/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
+    Route::post('/update/reservation/{id}', [ReservationController::class, 'update'])->name('update.reservation');
+
+    Route::get('calendar/view', [CalendarController::class, 'view'])->name('calendar.view');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/reservations', [ReservationController::class, 'index'])->name('all.reservations');
-Route::get('/create', [ReservationController::class, 'create'])->name('reservation.create');
-Route::post('/store/reservation', [ReservationController::class, 'store'])->name('reservation.store');
-Route::post('/action/reservation/{id}', [ReservationController::class, 'reservationAction'])->name('reservation.action');
-Route::get('/edit/reservation/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
-Route::post('/update/reservation/{id}', [ReservationController::class, 'update'])->name('update.reservation');
 
-Route::get('calendar/view', [CalendarController::class, 'view'])->name('calendar.view');
 require __DIR__.'/auth.php';
