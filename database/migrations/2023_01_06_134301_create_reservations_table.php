@@ -20,7 +20,7 @@ class CreateReservationsTable extends Migration
             $table->string('res_email');
             $table->string('res_contact_number');
             $table->text('res_message');
-            $table->date('res_date');
+            $table->datetime('res_date');
             $table->enum('status', ['Pending','Confirmed', 'Cancelled', 'Done']);
             $table->timestamps();
         });

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Spatie\GoogleCalendar\Event;
 use Carbon\Carbon;
+use App\Mail\ReservationConfimed;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -145,9 +147,17 @@ class ReservationController extends Controller
                 $event = new Event;
                 $event->name          = $event_description;
                 $event->description   = $event_description. "<br/>" . "Client name :" .$client_name . "<br/>" . "Client Email :" . $client_email . "<br/>" . "Client Contact Number :" . $client_contact_number;
-                $event->startDateTime = Carbon::now();
-                $event->endDateTime   = Carbon::now()->addHour();
+                $event->startDateTime = Carbon::parse($reservation->res_date);
+                $event->endDateTime   = Carbon::parse($reservation->res_date);
                 $event->save();
+
+                $data = [
+                    'clientname' => $client_name,
+                    'reservation_number' => $reservation->number,
+                    'event_date' => $reservation->res_date,
+                ];
+                
+                Mail::to($client_email)->send(new ReservationConfimed($data));
 
                 session()->flash('success', 'Booking Confirmed');
             }
