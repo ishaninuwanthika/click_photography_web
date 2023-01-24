@@ -16,6 +16,7 @@ We look forward to capturing beautiful memories for you and your loved ones.
 Sincerely, <br>
 Click by Dhanesh, <br>
 write@clickbydhanesh.co.nz <br>
-[Your Company Phone]
++64223921099
+
 
 @endcomponent

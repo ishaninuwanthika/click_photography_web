@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use Spatie\GoogleCalendar\Event;
 use Carbon\Carbon;
 use App\Mail\ReservationConfimed;
+use App\Mail\ReservationCancelled;
 use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
@@ -166,6 +167,15 @@ class ReservationController extends Controller
                     'status' => "Cancelled"
                 ]);
 
+                $client_email =  $reservation->res_email;
+                $event_date =  Carbon::parse($reservation->res_date);
+
+                $data = [
+                    'clientname' => $reservation->res_name,
+                    'event_date' => $event_date->format('d-m-Y'),
+                ];
+
+                Mail::to($client_email)->send(new ReservationCancelled($data));
                 session()->flash('success', 'Booking Cancelled');
             }
             if($request->has('remove')){
